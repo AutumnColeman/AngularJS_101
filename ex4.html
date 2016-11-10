@@ -21,34 +21,33 @@ Hints at the bottom of this file.
     <title>Fight or Flight</title>
     <script src="angular.js"></script>
     <script>
+
     var app = angular.module('my-app', []);
     app.controller('MainController', function($scope) {
       $scope.dragonHealth = 20;
       $scope.heroHealth = 10;
 
       $scope.fight = function() {
+        debugger
         var num = Math.random();
         if (num > 0.5) {
           $scope.dragonHealth -= 5;
         } else {
           $scope.heroHealth -= 5;
         }
-        checkWinner();
       };
 
       $scope.flight = function() {
         $scope.heroHealth += 2;
-        checkWinner();
       };
 
-      function checkWinner() {
-        if ($scope.dragonHealth <= 0) {
-          $scope.message = 'You win!';
-        }
-        if ($scope.heroHealth <= 0){
-          $scope.message = 'You lose!';
-        }
+      if ($scope.dragonHealth == 0) {
+        $scope.message = "You slayed the dragon!"
+      } else if ($scope.heroHealth == 0) {
+        $scope.message = "You died"
       }
+
+
     });
     </script>
   </head>
