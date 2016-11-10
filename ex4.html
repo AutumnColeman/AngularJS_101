@@ -28,12 +28,15 @@ Hints at the bottom of this file.
       $scope.heroHealth = 10;
 
       $scope.fight = function() {
-        debugger
         var num = Math.random();
         if (num > 0.5) {
           $scope.dragonHealth -= 5;
         } else {
           $scope.heroHealth -= 5;
+        } if ($scope.dragonHealth == 0) {
+          $scope.message = "You slayed the dragon!"
+        } else if ($scope.heroHealth == 0) {
+          $scope.message = "You died"
         }
       };
 
@@ -41,22 +44,16 @@ Hints at the bottom of this file.
         $scope.heroHealth += 2;
       };
 
-      if ($scope.dragonHealth == 0) {
-        $scope.message = "You slayed the dragon!"
-      } else if ($scope.heroHealth == 0) {
-        $scope.message = "You died"
-      }
-
-
     });
     </script>
   </head>
   <body ng-app="my-app" ng-controller="MainController">
     Hero: {{heroHealth}}<br>
-    Dragon: {{dragonHealth}}
-    {{ message }}
+    Dragon: {{dragonHealth}}<br>
+
     <button ng-click="fight()">Fight</button>
     <button ng-click="flight()">Flight</button>
+    {{ message }}
   </body>
 </html>
 
