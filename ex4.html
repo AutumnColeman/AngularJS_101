@@ -26,6 +26,7 @@ Hints at the bottom of this file.
     app.controller('MainController', function($scope) {
       $scope.dragonHealth = 20;
       $scope.heroHealth = 10;
+      $scope.gameover = false;
 
       $scope.fight = function() {
         var num = Math.random();
@@ -33,10 +34,12 @@ Hints at the bottom of this file.
           $scope.dragonHealth -= 5;
         } else {
           $scope.heroHealth -= 5;
-        } if ($scope.dragonHealth == 0) {
+        } if ($scope.dragonHealth <= 0) {
           $scope.message = "You slayed the dragon!"
-        } else if ($scope.heroHealth == 0) {
-          $scope.message = "You died"
+          $scope.gameover = true;
+        } if ($scope.heroHealth <= 0) {
+          $scope.message = "The dragon burned you to a crisp!"
+          $scope.gameover = true;
         }
       };
 
