@@ -21,24 +21,25 @@ Hints at the bottom of this file.
     var taskList = document.querySelector('ul');
 
     app.controller('ToDoListController', function($scope) {
-        $scope.tasks = [
-          { description: 'Eat' },
-          { description: 'Sleep' },
-          { description: 'Code' }
+        $scope.taskArray = [
+          { task: 'Eat', done: false },
+          { task: 'Sleep',  done: false },
+          { task: 'Code',  done: false }
         ];
         $scope.addTask = function() {
-          $scope.tasks.push({description: $scope.newTask});
-        }
+          var description = $scope.newTask;
+          var task = {
+            task: description
+          };
+          $scope.taskArray.push(task);
+          $scope.newTask = '';
+        };
+
+        $scope.removeTask = function(idx) {
+          $scope.taskArray.splice(idx, 1);
+        };
       });
 
-      // $scope.removeTask() = function () {
-      //   if (event.target.matches('button')) {
-      //     var removeButton = event.target;
-      //     var li = removeButton.parentElement;
-      //     var ul = li.parentElement;
-      //     li.remove();
-      //   }
-      // });
 
     </script>
   </head>
@@ -48,8 +49,8 @@ Hints at the bottom of this file.
         <input type="text" ng-model="newTask"><button type="submit" ng-click= "addTask()">Add</button>
       </form>
       <ul>
-        <li ng-repeat="task in tasks">
-          {{task.description}}
+        <li ng-repeat="task in taskArray" ng-class="{done: task.done}">
+          {{task.task}}<input type="checkbox" ng-model="task.done"><button ng-click="removeTask($index)">remove</button>
         </li>
       </ul>
     </div>
